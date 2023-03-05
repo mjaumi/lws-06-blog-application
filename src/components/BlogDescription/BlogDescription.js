@@ -3,7 +3,7 @@ import Tag from '../Tags/Tag';
 
 const BlogDescription = ({ blog }) => {
     // destructuring the blog object here
-    const { id, title, image, likes, tags, isSaved, description } = blog || {};
+    const { title, image, likes, tags, isSaved, description } = blog || {};
 
     // rendering blog description component here
     return (

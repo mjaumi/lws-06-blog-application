@@ -39,7 +39,7 @@ const BlogDetails = () => {
         content = (
             <>
                 <BlogDescription blog={blog} />
-                <RelatedBlogs />
+                <RelatedBlogs currentBlogId={blog.id} tags={blog.tags} />
             </>
         );
     }
