@@ -20,7 +20,7 @@ const RelatedBlogsItem = ({ blog }) => {
                     {
                         tags.map((tag, index) => <Tag
                             key={tag}
-                            tag={tags.length - index === 1 ? `#${tag}` : `#${tag},`}
+                            tag={tags.length - index === 1 ? `#${tag}` : `#${tag}, `}
                         />)
                     }
                 </div>

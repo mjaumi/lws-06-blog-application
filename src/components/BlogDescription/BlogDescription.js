@@ -1,9 +1,32 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { patchBlog } from '../../features/blog/blogSlice';
 import Tag from '../Tags/Tag';
 
 const BlogDescription = ({ blog }) => {
     // destructuring the blog object here
-    const { title, image, likes, tags, isSaved, description } = blog || {};
+    const { id, title, image, likes, tags, isSaved, description } = blog || {};
+
+    // integration of react-redux hooks here
+    const dispatch = useDispatch();
+
+    // handler function to handle the save feature
+    const saveBtnHandler = () => {
+        dispatch(patchBlog({
+            id,
+            isSaved: !isSaved,
+            likes,
+        }));
+    }
+
+    // handler function to handle the like feature
+    const likeBtnHandler = () => {
+        dispatch(patchBlog({
+            id,
+            isSaved: isSaved,
+            likes: likes + 1,
+        }));
+    }
 
     // rendering blog description component here
     return (
@@ -22,11 +45,11 @@ const BlogDescription = ({ blog }) => {
                     }
                 </div>
                 <div className='btn-group'>
-                    <button className='like-btn' id='lws-singleLinks'>
+                    <button onClick={likeBtnHandler} className='like-btn' id='lws-singleLinks'>
                         <i className='fa-regular fa-thumbs-up'></i> {likes}
                     </button>
-                    <button className={`${isSaved && 'active'} save-btn`} id='lws-singleSavedBtn'>
-                        <i className='fa-regular fa-bookmark'></i> Saved
+                    <button onClick={saveBtnHandler} className={`${isSaved && 'active'} save-btn`} id='lws-singleSavedBtn'>
+                        <i className='fa-regular fa-bookmark'></i> {isSaved ? 'Saved' : 'Save'}
                     </button>
                 </div>
                 <div className='mt-6'>
