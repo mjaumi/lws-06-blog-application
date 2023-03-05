@@ -10,7 +10,7 @@ const BlogItem = ({ blog }) => {
     return (
         <div className='lws-card'>
             <Link to={`/blog-details/${id}`}>
-                <img src={image} className='lws-card-image' alt='Top Github Alternatives' />
+                <img src={image} className='lws-card-image' alt={title} />
             </Link>
             <div className='p-4'>
                 <div className='lws-card-header'>
