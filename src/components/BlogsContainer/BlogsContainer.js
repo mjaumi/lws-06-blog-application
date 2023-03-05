@@ -24,6 +24,11 @@ const BlogsContainer = () => {
             case 'most_liked':
                 return (b1.likes < b2.likes) ? 1 : (b1.likes > b2.likes) ? -1 : 0;
 
+            case 'newest':
+                const date1 = Date.parse(b1.createdAt);
+                const date2 = Date.parse(b2.createdAt);
+                return (date1 < date2) ? 1 : (date1 > date2) ? -1 : 0;
+
             default:
                 return 0;
         }
