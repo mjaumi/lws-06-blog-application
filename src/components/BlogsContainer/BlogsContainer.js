@@ -8,11 +8,26 @@ const BlogsContainer = () => {
     // integration of react-redux hooks here
     const dispatch = useDispatch();
     const { isLoading, blogs, isError, error } = useSelector(state => state.blogs);
+    const { sortText } = useSelector(state => state.filters);
 
     // fetching all blogs from server here
     useEffect(() => {
         dispatch(fetchBlogs());
     }, [dispatch]);
+
+    // copy of blogs for mutation while sorting
+    const blogsForSorting = [...blogs];
+
+    // this function is sorting the blogs as per the sort select text
+    const sortBlogs = (b1, b2) => {
+        switch (sortText) {
+            case 'most_liked':
+                return (b1.likes < b2.likes) ? 1 : (b1.likes > b2.likes) ? -1 : 0;
+
+            default:
+                return 0;
+        }
+    }
 
     // deciding what content to render here
     let content = null;
@@ -33,10 +48,12 @@ const BlogsContainer = () => {
         content = (
             <main className='post-container' id='lws-postContainer'>
                 {
-                    blogs.map(blog => <BlogItem
-                        key={blog.id}
-                        blog={blog}
-                    />)
+                    blogsForSorting
+                        .sort((b1, b2) => sortBlogs(b1, b2))
+                        .map(blog => <BlogItem
+                            key={blog.id}
+                            blog={blog}
+                        />)
                 }
             </main>
         );
