@@ -8,7 +8,7 @@ const BlogsContainer = () => {
     // integration of react-redux hooks here
     const dispatch = useDispatch();
     const { isLoading, blogs, isError, error } = useSelector(state => state.blogs);
-    const { sortText } = useSelector(state => state.filters);
+    const { filterText, sortText } = useSelector(state => state.filters);
 
     // fetching all blogs from server here
     useEffect(() => {
@@ -34,6 +34,14 @@ const BlogsContainer = () => {
         }
     }
 
+    const filterBlogs = (blog) => {
+        if (filterText === 'Saved') {
+            return blog.isSaved;
+        } else {
+            return blog;
+        }
+    }
+
     // deciding what content to render here
     let content = null;
 
@@ -54,6 +62,7 @@ const BlogsContainer = () => {
             <main className='post-container' id='lws-postContainer'>
                 {
                     blogsForSorting
+                        .filter(filterBlogs)
                         .sort((b1, b2) => sortBlogs(b1, b2))
                         .map(blog => <BlogItem
                             key={blog.id}

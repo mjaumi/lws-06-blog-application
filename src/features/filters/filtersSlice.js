@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // initial state
 const initialState = {
     sortText: '',
-    filterText: '',
+    filterText: 'All',
 };
 
 // creating filters slice here
