@@ -14,6 +14,7 @@ const BlogsContainer = () => {
         dispatch(fetchBlogs());
     }, [dispatch]);
 
+    // deciding what content to render here
     let content = null;
 
     if (isLoading) {

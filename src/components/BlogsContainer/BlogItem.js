@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Tag from './Tag';
+import Tag from '../Tags/Tag';
 
 const BlogItem = ({ blog }) => {
     // destructuring the blog object here
-    const { title, image, createdAt, likes, tags, isSaved } = blog || {};
+    const { id, title, image, createdAt, likes, tags, isSaved } = blog || {};
 
     // rendering blog item component here
     return (
         <div className='lws-card'>
-            <Link to={`/blog-details/1`}>
+            <Link to={`/blog-details/${id}`}>
                 <img src={image} className='lws-card-image' alt='Top Github Alternatives' />
             </Link>
             <div className='p-4'>
@@ -17,7 +17,7 @@ const BlogItem = ({ blog }) => {
                     <p className='lws-publishedDate'>{createdAt}</p>
                     <p className='lws-likeCount'><i className='fa-regular fa-thumbs-up'></i>{likes}</p>
                 </div>
-                <Link to={`/blog-details/1`} className='lws-postTitle'> {title} </Link>
+                <Link to={`/blog-details/${id}`} className='lws-postTitle'> {title} </Link>
                 <div className='lws-tags'>
                     {
                         tags.map((tag, index) => <Tag
